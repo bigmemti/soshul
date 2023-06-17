@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\User;
+use App\Helper\ImageManager;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 
 class LinkController extends Controller
 {
+    use ImageManager;
     /**
      * Display a listing of the resource.
      */
@@ -16,7 +18,7 @@ class LinkController extends Controller
     {
         $links = $user->links;
 
-        view('user.link.index', [
+        return view('link.index', [
             'links' => $links,
             'user' => $user
         ]);
@@ -27,7 +29,7 @@ class LinkController extends Controller
      */
     public function create(User $user)
     {
-        return view('user.link.create',[
+        return view('link.create',[
             'user'=> $user
         ]);
     }
@@ -37,7 +39,17 @@ class LinkController extends Controller
      */
     public function store(StoreLinkRequest $request, User $user)
     {
-        $user->links()->create($request->validated());
+        $path = storage_path('public/image/');
+        !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+        if($file = $request->file('image')) {
+            $fileData = $this->uploads($file,$path,'image/');
+        }
+
+        $order = Link::selectRaw("MAX(sort) as `order`")->whereRelation('user', 'users.id', $user->id)->first()->order + 1 ?? 1;
+        
+        $user->links()->create([...$request->validated(),'image' => $fileData['fileName'], "sort" => $order]);
 
         return to_route('user.link.index', ['user' => $user])->withSuccess(__('link created successfully.'));
     }
@@ -47,7 +59,7 @@ class LinkController extends Controller
      */
     public function show(Link $link)
     {
-        return view('user.link.show',[
+        return view('link.show',[
             'link'=> $link
         ]);
     }
@@ -57,7 +69,7 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        return view('user.link.edit',[
+        return view('link.edit',[
             'link'=> $link
         ]);
     }

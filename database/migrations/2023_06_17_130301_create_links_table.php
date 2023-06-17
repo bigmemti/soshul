@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('color');
             $table->string('image');
             $table->string('link');
-            $table->unsignedTinyInteger('order');
+            $table->unsignedTinyInteger('sort');
             $table->timestamps();
+
+            $table->unique(['user_id', 'sort']);
         });
     }
 
