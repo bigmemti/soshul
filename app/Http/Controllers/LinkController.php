@@ -47,9 +47,9 @@ class LinkController extends Controller
             $fileData = $this->uploads($file,$path,'image/');
         }
 
-        $order = Link::selectRaw("MAX(sort) as `order`")->whereRelation('user', 'users.id', $user->id)->first()->order + 1 ?? 1;
-        
-        $user->links()->create([...$request->validated(),'image' => $fileData['fileName'], "sort" => $order]);
+        $sort = Link::selectRaw("MAX(sort) as sort")->whereRelation('user', 'users.id', $user->id)->first()->sort + 1 ?? 1;
+
+        $user->links()->create([...$request->validated(),'image' => $fileData['fileName'], "sort" => $sort]);
 
         return to_route('user.link.index', ['user' => $user])->withSuccess(__('link created successfully.'));
     }
