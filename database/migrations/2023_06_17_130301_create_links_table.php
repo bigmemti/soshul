@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('color');
             $table->string('image');
+            $table->string('link');
             $table->unsignedTinyInteger('order');
             $table->timestamps();
         });
