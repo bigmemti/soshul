@@ -48,9 +48,14 @@ class User extends Authenticatable
 
 
     protected function image(): Attribute
-{
-    return Attribute::make(
-        get: fn (mixed $value, array $attributes) => $value ? 'storage/profiles/'. $value : 'img/admin/admin.png'
-    );
-}
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $value ? 'storage/profiles/'. $value : 'img/admin/admin.png'
+        );
+    }
+
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
 }
