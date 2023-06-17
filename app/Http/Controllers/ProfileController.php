@@ -35,7 +35,6 @@ class ProfileController extends Controller
         if($file = $request->file('image')) {
             $fileData = $this->uploads($file,$path,'profiles/');
         }
-        $request->merge(['image' => $fileData['filePath']]);
 
         $request->user()->fill([...$request->validated(),'image' => $fileData['fileName']]);
 
