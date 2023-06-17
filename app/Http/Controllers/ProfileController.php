@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use App\Helper\ImageManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
+    use ImageManager;
     /**
      * Display the user's profile form.
      */
@@ -26,7 +28,16 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $path = storage_path('public/profiles/');
+        !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+        if($file = $request->file('image')) {
+            $fileData = $this->uploads($file,$path,'profiles/');
+        }
+        $request->merge(['image' => $fileData['filePath']]);
+
+        $request->user()->fill([...$request->validated(),'image' => $fileData['fileName']]);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
