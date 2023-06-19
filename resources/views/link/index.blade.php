@@ -13,7 +13,7 @@
                         <a class="bg-green-700 text-black rounded-md p-2" href="{{ route('user.link.create', ['user' => $user]) }}">{{ __('create new link') }}</a>
                     </div>
                     <div class="mt-3">
-                        <table>
+                        <table class="w-full">
                             <thead>
                                 <th>{{ __('image') }}</th>
                                 <th>{{ __('title') }}</th>
@@ -24,13 +24,15 @@
                             <tbody>
                                 @forelse ($links as $link)
                                     <tr>
-                                        <td>
+                                        <td class="flex justify-center">
                                             <img class="w-8 h-8 rounded-full" src="{{ asset($link->image) }}" alt="">
                                         </td>
-                                        <td>{{ $link->title }}</td>
-                                        <td>{{ $link->color }}</td>
-                                        <td>{{ $link->link }}</td>
-                                        <td> </td>
+                                        <td class="text-center">{{ $link->title }}</td>
+                                        <td class="text-center" style="color: {{ $link->color }};">{{ $link->color }}</td>
+                                        <td class="text-center">{{ $link->link }}</td>
+                                        <td class="text-center">
+                                            
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
