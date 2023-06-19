@@ -11,23 +11,45 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('user.link.store', ['user' => $user]) }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div>
-                            <label for="">title</label>
-                            <input class="dark:bg-gray-800" type="text" name="title">
+                        <div class="flex flex-col my-2">
+                            <label for="title" class="text-lg text-gray-400">title</label>
+                            @error('title')
+                                <span class="text-sm text-red-800">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <input class="dark:bg-gray-800 mt-2" type="text" name="title" id="title">
                         </div>
-                        <div>
-                            <label for="">color</label>
-                            <input class="dark:bg-gray-800" type="color" name="color" id="color">
+                        <div class="flex flex-col my-2">
+                            <label for="color" class="text-lg text-gray-400">color</label>
+                            @error('color')
+                                <span class="text-sm text-red-800">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <input class="dark:bg-gray-800 mt-2" type="color" name="color" id="color">
                         </div>
-                        <div>
-                            <label for="image">image</label>
-                            <input class="dark:bg-gray-800" type="file" name="image" id="image">
+                        <div class="flex flex-col my-2">
+                            <label for="image" class="text-lg text-gray-400">image</label>
+                            @error('image')
+                                <span class="text-sm text-red-800">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <input class="dark:bg-gray-800 mt-2" type="file" name="image" id="image">
                         </div>
-                        <div>
-                            <label for="link">link</label>
-                            <input class="dark:bg-gray-800" type="url" name="link" id="link">
+                        <div class="flex flex-col my-2">
+                            <label for="link" class="text-lg text-gray-400">link</label>
+                            @error('link')
+                                <span class="text-sm text-red-800">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <input class="dark:bg-gray-800 mt-2" type="url" name="link" id="link">
+                        </div class="flex flex-col my-2">
+                        <div class="flex justify-end">
+                            <input type="submit" value="submit" class="mt-5 p-4 bg-green-500 rounded-lg px-6">
                         </div>
-                        <input type="submit" value="submit">
                     </form>
                 </div>
             </div>
