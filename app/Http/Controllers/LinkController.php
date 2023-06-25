@@ -16,6 +16,8 @@ class LinkController extends Controller
      */
     public function index(User $user)
     {
+        $this->authorize('viewAny',[Link::class, $user]);
+
         $links = $user->links;
 
         return view('link.index', [
@@ -29,6 +31,8 @@ class LinkController extends Controller
      */
     public function create(User $user)
     {
+        $this->authorize('create',[Link::class, $user]);
+
         return view('link.create',[
             'user'=> $user
         ]);
@@ -59,6 +63,8 @@ class LinkController extends Controller
      */
     public function show(Link $link)
     {
+        $this->authorize('view',$link);
+
         return view('link.show',[
             'link'=> $link
         ]);
@@ -69,6 +75,8 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
+        $this->authorize('update',$link);
+
         return view('link.edit',[
             'link'=> $link
         ]);
@@ -98,6 +106,8 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
+        $this->authorize('delete',$link);
+
         $this->delete($link->image_with_directory);
         $link->delete();
 

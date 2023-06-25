@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Link;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateLinkRequest extends FormRequest
@@ -11,7 +12,9 @@ class UpdateLinkRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $link = Link::find($this->route('link'))->first();
+        
+        return auth()->user()->id == $link->user_id;
     }
 
     /**

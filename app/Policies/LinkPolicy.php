@@ -11,9 +11,9 @@ class LinkPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $auth_user,User $owner_user): bool
     {
-        //
+        return $auth_user->id == $owner_user->id;
     }
 
     /**
@@ -21,15 +21,15 @@ class LinkPolicy
      */
     public function view(User $user, Link $link): bool
     {
-        //
+        return $user->id == $link->user_id;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $auth_user,User $owner_user): bool
     {
-        //
+        return  $auth_user->id == $owner_user->id;
     }
 
     /**
@@ -37,7 +37,7 @@ class LinkPolicy
      */
     public function update(User $user, Link $link): bool
     {
-        //
+        return  $user->id == $link->user_id;
     }
 
     /**
@@ -45,22 +45,6 @@ class LinkPolicy
      */
     public function delete(User $user, Link $link): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Link $link): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Link $link): bool
-    {
-        //
+        return  $user->id == $link->user_id;
     }
 }
