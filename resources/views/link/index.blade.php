@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="p-3">
                         <a class="bg-green-700 text-black rounded-md p-2" href="{{ route('user.link.create', ['user' => $user]) }}">{{ __('create new link') }}</a>
+                        <button class="bg-yellow-500 text-black rounded-md p-2" onclick="navigator.clipboard.writeText('{{ route('links',['user' => $user]) }}'); alert('{{ __('your link is copied in your clipboard.') }}')">{{ __('shear your links') }}</ذ>
                     </div>
                     <div class="mt-3">
                         <table class="w-full">

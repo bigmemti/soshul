@@ -39,8 +39,8 @@
             <main  class="flex items-center justify-center px-8">
                 <div class="flex flex-col gap-4">
                     @forelse ($links as $link )
-                        <div class="border-4 p-4 px-8 rounded-xl" style="border-color: {{ $link->color }}">
-                            <a href="{{ $link->link }}" class="flex items-center justify-center gap-6 ">
+                        <div class="border-4 p-4 px-8 rounded-xl hover:scale-125 transition-all hover:transition-all" style="border-color: {{ $link->color }}">
+                            <a href="{{ $link->link }}" class="flex items-center justify-center gap-6">
                                 <img class="w-16 h-16 rounded-full" src="{{ asset($link->image) }}" alt="">
                                 <p style="color: {{ $link->color }}" class="font-bold text-xl">
                                     {{ $link->title }}

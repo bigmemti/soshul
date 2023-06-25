@@ -25,7 +25,7 @@ class StoreLinkRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'color' => ['required'],
             'link'  => ['required'],
-            'image' => ['image','mimes:jpeg,png,jpg', 'max:2048']
+            'image' => ['required','image','mimes:jpeg,png,jpg', 'max:2048']
         ];
     }
 }
