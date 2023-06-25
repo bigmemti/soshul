@@ -29,9 +29,21 @@
                                         </td>
                                         <td class="text-center">{{ $link->title }}</td>
                                         <td class="text-center" style="color: {{ $link->color }};">{{ $link->color }}</td>
-                                        <td class="text-center">{{ $link->link }}</td>
                                         <td class="text-center">
-                                            
+                                            <a href="{{ $link->link }}">
+                                                {{ $link->link }}
+                                            </a>
+                                        </td>
+                                        <td class="flex gap-3 justify-center">
+                                            <a href="{{ route('link.show', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-sky-500">show</a>
+                                            <a href="{{ route('link.edit', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-yellow-500">edit</a>
+                                            <form action="{{ route('link.destroy', ['link' => $link]) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="p-2 px-6 rounded-lg cursor-pointer bg-red-500 ">
+                                                    delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

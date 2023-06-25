@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageManager {
 
-    public function uploads($file, $path, $folder)
+    public function upload($file, $path, $folder)
     {
         if($file) {
             $file_name   = time() . $file->getClientOriginalName();
@@ -20,6 +20,11 @@ trait ImageManager {
                 'filePath' => $filePath,
             ];
         }
+    }
+
+    public function delete($file_name)
+    {
+        Storage::disk('public')->delete($file_name);
     }
 
 }

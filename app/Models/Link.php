@@ -29,4 +29,18 @@ class Link extends Model
             get: fn (mixed $value, array $attributes) => $value ? 'storage/image/'. $value : '/'
         );
     }
+
+    protected function imageWithDirectory(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['image'] ? 'image/'. $attributes['image'] : '/'
+        );
+    }
+
+    protected function pureImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['image'] ? $attributes['image'] : '/'
+        );
+    }
 }

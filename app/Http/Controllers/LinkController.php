@@ -44,12 +44,12 @@ class LinkController extends Controller
             mkdir($path, 0777, true);
 
         if($file = $request->file('image')) {
-            $fileData = $this->uploads($file,$path,'image/');
+            $fileData = $this->upload($file,$path,'image/');
         }
 
         $sort = Link::selectRaw("MAX(sort) as sort")->whereRelation('user', 'users.id', $user->id)->first()->sort + 1 ?? 1;
 
-        $user->links()->create([...$request->validated(),'image' => $fileData['fileName'], "sort" => $sort]);
+        $link = $user->links()->create([...$request->validated(),'image' => $fileData['fileName'], "sort" => $sort]);
 
         return to_route('user.link.index', ['user' => $user])->withSuccess(__('link created successfully.'));
     }
@@ -79,7 +79,16 @@ class LinkController extends Controller
      */
     public function update(UpdateLinkRequest $request, Link $link)
     {
-        $link->update($request->validated());
+        $fileData['fileName'] = $link->pure_image;
+
+        if($file = $request->file('image')){
+            $path = storage_path('public/image/');
+            $this->delete($link->image_with_directory);
+            $fileData = $this->upload($file,$path,'image/');
+
+        }
+
+        $link->update([...$request->validated(),'image' => $fileData['fileName']]);
 
         return to_route('user.link.index', ['user' => $link->user])->withSuccess(__('link updated successfully.'));
     }
@@ -89,6 +98,7 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
+        $this->delete($link->image_with_directory);
         $link->delete();
 
         return to_route('user.link.index', ['user' => $link->user])->withSuccess(__('link deleted successfully.'));

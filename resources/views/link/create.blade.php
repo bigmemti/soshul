@@ -18,7 +18,7 @@
                                     {{ $message }}
                                 </span>
                             @enderror
-                            <input class="dark:bg-gray-800 mt-2" type="text" name="title" id="title">
+                            <input value="{{ old('title') }}" class="dark:bg-gray-800 mt-2" type="text" name="title" id="title">
                         </div>
                         <div class="flex flex-col my-2">
                             <label for="color" class="text-lg text-gray-400">color</label>
@@ -27,7 +27,7 @@
                                     {{ $message }}
                                 </span>
                             @enderror
-                            <input class="dark:bg-gray-800 mt-2" type="color" name="color" id="color">
+                            <input value="{{ old('color') }}" class="dark:bg-gray-800 mt-2" type="color" name="color" id="color">
                         </div>
                         <div class="flex flex-col my-2">
                             <label for="image" class="text-lg text-gray-400">image</label>
@@ -36,7 +36,7 @@
                                     {{ $message }}
                                 </span>
                             @enderror
-                            <input class="dark:bg-gray-800 mt-2" type="file" name="image" id="image">
+                            <input value="{{ old('image') }}" class="dark:bg-gray-800 mt-2" type="file" name="image" id="image">
                         </div>
                         <div class="flex flex-col my-2">
                             <label for="link" class="text-lg text-gray-400">link</label>
@@ -45,10 +45,10 @@
                                     {{ $message }}
                                 </span>
                             @enderror
-                            <input class="dark:bg-gray-800 mt-2" type="url" name="link" id="link">
+                            <input value="{{ old('link') }}" class="dark:bg-gray-800 mt-2" type="url" name="link" id="link">
                         </div class="flex flex-col my-2">
                         <div class="flex justify-end">
-                            <input type="submit" value="submit" class="mt-5 p-4 bg-green-500 rounded-lg px-6">
+                            <input type="submit" value="submit" class="mt-5 p-3 bg-green-500 rounded-lg px-6 cursor-pointer">
                         </div>
                     </form>
                 </div>
