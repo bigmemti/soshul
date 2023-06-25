@@ -13,7 +13,7 @@
                         @csrf
                         @method('patch')
                         <div class="flex flex-col my-2">
-                            <label for="title" class="text-lg text-gray-400">title</label>
+                            <label for="title" class="text-lg text-gray-400">{{__('title')}}</label>
                             @error('title')
                                 <span class="text-sm text-red-800">
                                     {{ $message }}
@@ -22,7 +22,7 @@
                             <input value="{{ $link->title }}" class="dark:bg-gray-800 mt-2" type="text" name="title" id="title">
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="color" class="text-lg text-gray-400">color</label>
+                            <label for="color" class="text-lg text-gray-400">{{__('color')}}</label>
                             @error('color')
                                 <span class="text-sm text-red-800">
                                     {{ $message }}
@@ -31,7 +31,7 @@
                             <input value="{{ $link->color }}" class="dark:bg-gray-800 mt-2" type="color" name="color" id="color">
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="image" class="text-lg text-gray-400">image</label>
+                            <label for="image" class="text-lg text-gray-400">{{__('image')}}</label>
                             @error('image')
                                 <span class="text-sm text-red-800">
                                     {{ $message }}
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="link" class="text-lg text-gray-400">link</label>
+                            <label for="link" class="text-lg text-gray-400">{{__('link')}}</label>
                             @error('link')
                                 <span class="text-sm text-red-800">
                                     {{ $message }}
@@ -54,7 +54,7 @@
                             <input value="{{ $link->link }}" class="dark:bg-gray-800 mt-2" type="url" name="link" id="link">
                         </div class="flex flex-col my-2">
                         <div class="flex justify-end">
-                            <input type="submit" value="submit" class="mt-5 p-3 bg-green-500 rounded-lg px-6 cursor-pointer">
+                            <input type="submit" value="{{__('submit')}}" class="mt-5 p-3 bg-green-500 rounded-lg px-6 cursor-pointer">
                         </div>
                     </form>
                 </div>

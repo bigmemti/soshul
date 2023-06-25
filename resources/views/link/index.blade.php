@@ -48,7 +48,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">{{ __('there is noting.') }}</td>
+                                        <td colspan="5" class="text-center pt-4 text-2xl">{{ __('there is noting.') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>
