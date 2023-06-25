@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShowLinksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('user.link', LinkController::class)->shallow();
+
+Route::get('/links/{user:username}', [ShowLinksController::class,'index']);
 
 require __DIR__.'/auth.php';
