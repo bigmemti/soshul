@@ -35,13 +35,13 @@
                                             </a>
                                         </td>
                                         <td class="flex gap-3 justify-center">
-                                            <a href="{{ route('link.show', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-sky-500">show</a>
-                                            <a href="{{ route('link.edit', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-yellow-500">edit</a>
+                                            <a href="{{ route('link.show', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-sky-500">{{ __("show") }}</a>
+                                            <a href="{{ route('link.edit', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-yellow-500">{{ __("edit") }}</a>
                                             <form action="{{ route('link.destroy', ['link' => $link]) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="p-2 px-6 rounded-lg cursor-pointer bg-red-500 ">
-                                                    delete
+                                                    {{ __("delete") }}
                                                 </button>
                                             </form>
                                         </td>
