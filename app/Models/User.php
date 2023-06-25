@@ -54,6 +54,13 @@ class User extends Authenticatable
         );
     }
 
+    protected function imageWithDirectory(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['image'] ? 'profiles/'. $attributes['image'] : null
+        );
+    }
+
     public function links()
     {
         return $this->hasMany(Link::class);

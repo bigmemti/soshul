@@ -33,10 +33,14 @@ class ProfileController extends Controller
             mkdir($path, 0777, true);
 
         if($file = $request->file('image')) {
-            $fileData = $this->uploads($file,$path,'profiles/');
+            $request->user()->image_with_directory && $this->delete($request->user()->image_with_directory);
+            $fileData = $this->upload($file,$path,'profiles/');
+            $fill =[...$request->validated(),'image' => $fileData['fileName']];
+        }else{
+            $fill = $request->validated();
         }
 
-        $request->user()->fill([...$request->validated(),'image' => $fileData['fileName']]);
+        $request->user()->fill($fill);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
