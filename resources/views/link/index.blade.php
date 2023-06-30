@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="p-3">
-                        <a class="bg-green-700 text-black rounded-md p-2" href="{{ route('user.link.create', ['user' => $user]) }}">{{ __('create new link') }}</a>
-                        <button class="bg-yellow-500 text-black rounded-md p-2" onclick="navigator.clipboard.writeText('{{ route('links',['user' => $user]) }}')
+                    <div class="p-3 flex flex-col sm:flex-row gap-2">
+                        <a class="text-sm sm:text-base bg-green-700 text-black rounded-md p-2 text-center" href="{{ route('user.link.create', ['user' => $user]) }}">{{ __('create new link') }}</a>
+                        <button class="text-sm sm:text-base bg-yellow-500 text-black rounded-md p-2" onclick="navigator.clipboard.writeText('{{ route('links',['user' => $user]) }}')
                             .then(() => {alert('{{ __('your link is copied in your clipboard.') }}')})
                             .catch(() => {alert('something went wrong')});">{{ __('shear your links') }}</button>
                     </div>
@@ -20,8 +20,8 @@
                             <thead>
                                 <th>{{ __('image') }}</th>
                                 <th>{{ __('title') }}</th>
-                                <th>{{ __('color') }}</th>
-                                <th>{{ __('link') }}</th>
+                                <th class="hidden md:table-cell">{{ __('color') }}</th>
+                                <th class="hidden md:table-cell">{{ __('link') }}</th>
                                 <th>{{ __('actions') }}</th>
                             </thead>
                             <tbody>
@@ -30,20 +30,25 @@
                                         <td class="flex justify-center">
                                             <img class="w-8 h-8 rounded-full" src="{{ asset($link->image) }}" alt="">
                                         </td>
-                                        <td class="text-center">{{ $link->title }}</td>
-                                        <td class="text-center" style="color: {{ $link->color }};">{{ $link->color }}</td>
                                         <td class="text-center">
+                                            <p class="hidden md:inline-block">{{ $link->title }}</p>
+                                            <a href="{{ $link->link }}"  style="color: {{ $link->color }};" class="md:hidden">
+                                                {{ $link->title }}
+                                            </a>
+                                        </td>
+                                        <td class="text-center hidden md:table-cell" style="color: {{ $link->color }};">{{ $link->color }}</td>
+                                        <td class="text-center hidden md:table-cell">
                                             <a href="{{ $link->link }}">
                                                 {{ $link->link }}
                                             </a>
                                         </td>
-                                        <td class="flex gap-3 justify-center">
-                                            <a href="{{ route('link.show', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-sky-500">{{ __("show") }}</a>
-                                            <a href="{{ route('link.edit', ['link' => $link]) }}" class="p-2 px-6 rounded-lg cursor-pointer bg-yellow-500">{{ __("edit") }}</a>
+                                        <td class="flex gap-1 sm:gap-3 justify-center">
+                                            <a href="{{ route('link.show', ['link' => $link]) }}" class="text-xs p-2 px-4 sm:text-base md:px-6 rounded-lg cursor-pointer bg-sky-500">{{ __("show") }}</a>
+                                            <a href="{{ route('link.edit', ['link' => $link]) }}" class="text-xs p-2 px-4 sm:text-base md:px-6 rounded-lg cursor-pointer bg-yellow-500">{{ __("edit") }}</a>
                                             <form action="{{ route('link.destroy', ['link' => $link]) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="p-2 px-6 rounded-lg cursor-pointer bg-red-500 ">
+                                                <button class="text-xs p-2 px-4 sm:text-base md:px-6 rounded-lg cursor-pointer bg-red-500 ">
                                                     {{ __("delete") }}
                                                 </button>
                                             </form>
